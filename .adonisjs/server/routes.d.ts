@@ -8,17 +8,61 @@ export type ScannedRoutes = {
     'auth.access_token.store': { paramsTuple?: []; params?: {} }
     'auth.access_token.destroy': { paramsTuple?: []; params?: {} }
     'profile.profile.show': { paramsTuple?: []; params?: {} }
+    'products.index': { paramsTuple?: []; params?: {} }
+    'products.create': { paramsTuple?: []; params?: {} }
+    'products.store': { paramsTuple?: []; params?: {} }
+    'products.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'products.edit': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'products.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'products.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'flavors.index': { paramsTuple?: []; params?: {} }
+    'flavors.create': { paramsTuple?: []; params?: {} }
+    'flavors.store': { paramsTuple?: []; params?: {} }
+    'flavors.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'flavors.edit': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'flavors.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'flavors.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   GET: {
     'profile.profile.show': { paramsTuple?: []; params?: {} }
+    'products.index': { paramsTuple?: []; params?: {} }
+    'products.create': { paramsTuple?: []; params?: {} }
+    'products.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'products.edit': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'flavors.index': { paramsTuple?: []; params?: {} }
+    'flavors.create': { paramsTuple?: []; params?: {} }
+    'flavors.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'flavors.edit': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   HEAD: {
     'profile.profile.show': { paramsTuple?: []; params?: {} }
+    'products.index': { paramsTuple?: []; params?: {} }
+    'products.create': { paramsTuple?: []; params?: {} }
+    'products.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'products.edit': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'flavors.index': { paramsTuple?: []; params?: {} }
+    'flavors.create': { paramsTuple?: []; params?: {} }
+    'flavors.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'flavors.edit': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   POST: {
     'auth.new_account.store': { paramsTuple?: []; params?: {} }
     'auth.access_token.store': { paramsTuple?: []; params?: {} }
     'auth.access_token.destroy': { paramsTuple?: []; params?: {} }
+    'products.store': { paramsTuple?: []; params?: {} }
+    'flavors.store': { paramsTuple?: []; params?: {} }
+  }
+  PUT: {
+    'products.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'flavors.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+  }
+  PATCH: {
+    'products.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'flavors.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+  }
+  DELETE: {
+    'products.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'flavors.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
 }
 declare module '@adonisjs/core/types/http' {

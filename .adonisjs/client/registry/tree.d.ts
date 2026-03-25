@@ -16,4 +16,22 @@ export interface ApiDefinition {
       show: typeof routes['profile.profile.show']
     }
   }
+  products: {
+    index: typeof routes['products.index']
+    create: typeof routes['products.create']
+    store: typeof routes['products.store']
+    show: typeof routes['products.show']
+    edit: typeof routes['products.edit']
+    update: typeof routes['products.update']
+    destroy: typeof routes['products.destroy']
+  }
+  flavors: {
+    index: typeof routes['flavors.index']
+    create: typeof routes['flavors.create']
+    store: typeof routes['flavors.store']
+    show: typeof routes['flavors.show']
+    edit: typeof routes['flavors.edit']
+    update: typeof routes['flavors.update']
+    destroy: typeof routes['flavors.destroy']
+  }
 }
