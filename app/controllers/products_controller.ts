@@ -1,5 +1,5 @@
 import Product from '#models/product'
-import { storeProductValidator } from '#validators/product'
+import { storeProductValidator, updateProductValidator } from '#validators/product'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class ProductsController {
@@ -29,7 +29,7 @@ export default class ProductsController {
             return { error: 'Product not found' }
         }
         try {
-            const data = await request.validateUsing(storeProductValidator)
+            const data = await request.validateUsing(updateProductValidator)
             await product.merge(data).save()
 
             return { message: 'Product updated successfully' }
