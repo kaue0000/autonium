@@ -6,27 +6,30 @@ export default class ProductsController {
     async index({ }: HttpContext) {
         return await Product.all()
     }
-    async show({ params }: HttpContext) {
-        const product = await Product.find(params.id)
-        if (!product) {
-            return { error: 'Product not found' }
+    async show({ params, response }: HttpContext) {
+        try {
+            return await Product.query()
+            .where('id', params.id)
+            .preload('flavors')
+            .firstOrFail()
+        } catch (error) {
+            return response.status(404).json({ error: 'Product not found' })
         }
-        return product.related('flavors')
     }
-    async store({ request }: HttpContext) {
+    async store({ request, response }: HttpContext) {
         try {
          const data = await request.validateUsing(storeProductValidator)
          await Product.create(data)
 
          return { message: 'Product created successfully' }  
         } catch (error) {
-            return { error: 'Failed to create product' }
+            return response.status(404).json({ error: 'Failed to create product' })
         }
     }
-    async update({ params, request }: HttpContext) {
+    async update({ params, request, response }: HttpContext) {
         const product = await Product.find(params.id)
         if (!product) {
-            return { error: 'Product not found' }
+            return response.status(404).json({ error: 'Product not found' })
         }
         try {
             const data = await request.validateUsing(updateProductValidator)
@@ -34,7 +37,7 @@ export default class ProductsController {
 
             return { message: 'Product updated successfully' }
         } catch (error) {
-            return { error: 'Failed to update product' }
+            return response.status(404).json({ error: 'Failed to update product' })
         }
     }
 }
