@@ -1,0 +1,25 @@
+services:
+  autonium:
+    image: postgres:16
+    container_name: autonium
+    restart: always
+    environment:
+      POSTGRES_USER: autonium
+      POSTGRES_PASSWORD: autonium
+      POSTGRES_DB: autonium
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - autonium
+
+volumes:
+  pgdata:
