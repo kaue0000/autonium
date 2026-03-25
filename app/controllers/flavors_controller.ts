@@ -6,21 +6,21 @@ export default class FlavorsController {
     async index({ }: HttpContext) {
         return await Flavor.all()
     }
-    async show({ params }: HttpContext) {
-        const flavor = await Flavor.find(params.id)
-        if (!flavor) {
-            return { error: 'Flavor not found' }
+    async show({ params, response }: HttpContext) {
+        try {
+            return await Flavor.query().where('id', params.id).preload('products').firstOrFail()
+        } catch (error) {
+            return response.status(404).json({ error: 'Flavor not found' })
         }
-        return flavor.related('products')
     }
-    async store({ request }: HttpContext) {
+    async store({ request, response }: HttpContext) {
         try {
             const data = await request.validateUsing(storeFlavorValidator)
             await Flavor.create(data)
 
             return { message: 'Flavor created successfully' }  
         } catch (error) {
-            return { error: 'Failed to create flavor' }
+            return response.status(404).json({ error: 'Failed to create flavor' })
         }
     }
     async update({ params, request }: HttpContext) {
