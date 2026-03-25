@@ -35,3 +35,13 @@ router
       .use(middleware.auth())
   })
   .prefix('/api/v1')
+
+  router
+    .group(() => {
+      router.resource('/products', '#controllers/products_controller')
+    })
+
+    router
+    .group(() => {
+      router.resource('/flavors', '#controllers/flavors_controller')
+    })
