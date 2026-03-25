@@ -23,10 +23,10 @@ export default class FlavorsController {
             return response.status(404).json({ error: 'Failed to create flavor' })
         }
     }
-    async update({ params, request }: HttpContext) {
+    async update({ params, request, response }: HttpContext) {
         const flavor = await Flavor.find(params.id)
         if (!flavor) {
-            return { error: 'Flavor not found' }
+            return response.status(404).json({ error: 'Flavor not found' })
         }
         try {
             const data = await request.validateUsing(updateFlavorValidator)
@@ -34,7 +34,7 @@ export default class FlavorsController {
 
             return { message: 'Flavor updated successfully' }
         } catch (error) {
-            return { error: 'Failed to update flavor' }
+            return response.status(404).json({ error: 'Failed to update flavor' })
         }
     }
 }
