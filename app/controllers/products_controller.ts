@@ -43,13 +43,12 @@ export default class ProductsController {
     }
     async syncFlavors({ params, request, response }: HttpContext) {
         try {
-            const productName = await request.input('product_name')
-            const flavorName = await request.input('flavor_name')
+            const flavorId = request.input('flavor_id')
 
-            const product = await Product.findOrFail('name', productName)
-            const flavor = await Flavor.findOrFail('name', flavorName)
+            const product = await Product.findOrFail(params.id)
+            const flavor = await Flavor.findOrFail(flavorId)
 
-            await product.related('flavors').sync([flavor.id])
+            await product.related('flavors').attach([flavor.id])
 
             return { message: 'Flavors synced successfully' }
         } catch (error) {
