@@ -24,6 +24,7 @@ export interface ApiDefinition {
     edit: typeof routes['products.edit']
     update: typeof routes['products.update']
     destroy: typeof routes['products.destroy']
+    syncFlavors: typeof routes['products.sync_flavors']
   }
   flavors: {
     index: typeof routes['flavors.index']

@@ -45,3 +45,5 @@ router
     .group(() => {
       router.resource('/flavors', '#controllers/flavors_controller')
     })
+
+    router.put('/products/:id/sync-flavors', '#controllers/products_controller.syncFlavors')

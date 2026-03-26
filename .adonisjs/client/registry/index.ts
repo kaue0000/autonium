@@ -114,6 +114,12 @@ const routes = {
     tokens: [{"old":"/flavors/:id","type":0,"val":"flavors","end":""},{"old":"/flavors/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['flavors.destroy']['types'],
   },
+  'products.sync_flavors': {
+    methods: ["PUT"],
+    pattern: '/products/:id/sync-flavors',
+    tokens: [{"old":"/products/:id/sync-flavors","type":0,"val":"products","end":""},{"old":"/products/:id/sync-flavors","type":1,"val":"id","end":""},{"old":"/products/:id/sync-flavors","type":0,"val":"sync-flavors","end":""}],
+    types: placeholder as Registry['products.sync_flavors']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }

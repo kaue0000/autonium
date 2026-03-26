@@ -22,6 +22,7 @@ export type ScannedRoutes = {
     'flavors.edit': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'flavors.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'flavors.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'products.sync_flavors': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   GET: {
     'profile.profile.show': { paramsTuple?: []; params?: {} }
@@ -55,6 +56,7 @@ export type ScannedRoutes = {
   PUT: {
     'products.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'flavors.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'products.sync_flavors': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   PATCH: {
     'products.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

@@ -223,4 +223,16 @@ export interface Registry {
       errorResponse: unknown
     }
   }
+  'products.sync_flavors': {
+    methods: ["PUT"]
+    pattern: '/products/:id/sync-flavors'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
 }
