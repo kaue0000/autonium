@@ -1,40 +1,33 @@
 import Flavor from '#models/flavor'
-import { storeFlavorValidator, updateFlavorValidator } from '#validators/flavor'
-import type { HttpContext } from '@adonisjs/core/http'
+import { storeFlavorValidator } from '#validators/flavor'
+import { HttpContext } from '@adonisjs/core/http'
 
 export default class FlavorsController {
-    async index({ }: HttpContext) {
+    async index({}: HttpContext){
         return await Flavor.all()
     }
-    async show({ params, response }: HttpContext) {
+    async show({ params, response }: HttpContext){
+        try{
+        return await Flavor.query().where('id', params.id).preload('products').firstOrFail()
+        } catch(error){
+            return response.status(404).json({ error: 'Product not found.' })
+        }
+        }
+    async store({ request, response }: HttpContext){
         try {
-            return await Flavor.query().where('id', params.id).preload('products').firstOrFail()
+            const flavorData = await request.validateUsing(storeFlavorValidator)
+
+            await Flavor.create(flavorData)
+
+            return response.status(200).send('Flavor has been created.')
         } catch (error) {
-            return response.status(404).json({ error: 'Flavor not found' })
+            return response.status(400).send('Product cannot be created.')
         }
     }
-    async store({ request, response }: HttpContext) {
-        try {
-            const data = await request.validateUsing(storeFlavorValidator)
-            await Flavor.create(data)
-
-            return { message: 'Flavor created successfully' }  
-        } catch (error) {
-            return response.status(404).json({ error: 'Failed to create flavor' })
-        }
+    async update({}: HttpContext){
+        
     }
-    async update({ params, request, response }: HttpContext) {
-        const flavor = await Flavor.find(params.id)
-        if (!flavor) {
-            return response.status(404).json({ error: 'Flavor not found' })
-        }
-        try {
-            const data = await request.validateUsing(updateFlavorValidator)
-            await flavor.merge(data).save()
-
-            return { message: 'Flavor updated successfully' }
-        } catch (error) {
-            return response.status(404).json({ error: 'Failed to update flavor' })
-        }
+    async delete({}: HttpContext){
+        
     }
 }
